@@ -1,7 +1,6 @@
-from django.shortcuts import render
-
-# Create your views here.
-
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ContactForm
 def home_page(request):
     return render(request=request,template_name="index.html")
 
@@ -21,7 +20,13 @@ def cart_page(request):
     return render(request=request,template_name="cart.html")
 
 def contact_page(request):
-    return render(request=request,template_name="contact.html")
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Murojatingiz muvaffaqiyatli yuborildi  🎉")
+            return redirect('home-page')
+    return render(request=request,template_name='contact.html')
 
 def single_product_page(request):
     return render(request=request,template_name="single-product.html")
