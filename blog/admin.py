@@ -19,6 +19,7 @@ class BlogPostAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
     prepopulated_fields = {"slug": ("title",)}  # avtomatik slug hosil qilish
 
+
     def image_tag(self, obj):
         if obj.image:
             return format_html('<img src="{}" width="60" height="60" style="object-fit: cover;" />', obj.image.url)
