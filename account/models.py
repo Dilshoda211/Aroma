@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    phone_number = models.CharField(max_length=13, unique=True)
+    phone_number = models.CharField(max_length=13, unique=True,blank=True,null=True)
     photo = models.ImageField(upload_to="Images/Users/",blank=True,null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
